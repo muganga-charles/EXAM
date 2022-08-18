@@ -1,0 +1,14 @@
+1-- a query to show a song and its genre
+SELECT title,genre FROM tracks JOIN genres ON genres.track_id = tracks.track_id;
+
+2-- a query to display artists'name with songs having length in range 100-180
+SELECT artist_name FROM artist where artist_id IN (SELECT artist_id FROM Ranking WHERE track_id IN (SELECT track_id FROM tracks WHERE length BETWEEN "110" AND "180"));
+
+3--A query that gets the displays the top 5 songs with the highest energy
+SELECT title FROM tracks WHERE track_id IN (SELECT track_id FROM Ranking ORDER BY energy DESC LIMIT 5); 
+
+4--a query that shows the top 5 Ranked artist by liveness
+SELECT artist_name FROM artist WHERE artist_id IN (SELECT artist_id FROM Ranking ORDER BY liveness DESC LIMIT 5); 
+
+5-- a query that shows the artist and their songs
+SELECT artist_name,title FROM artist,Ranking,tracks ON tracks.track_id = Ranking.track_id AND Ranking.artist_id = artist.artist_id;
